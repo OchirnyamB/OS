@@ -1,0 +1,26 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/aardz6/learningmodules_aardz6/arrays/include/arrays.h
+stdbool.h
+-
+stddef.h
+-
+sys/types.h
+-
+
+/home/aardz6/learningmodules_aardz6/arrays/src/arrays.c
+string.h
+-
+stdlib.h
+-
+stdio.h
+-
+../include/arrays.h
+/home/aardz6/learningmodules_aardz6/arrays/include/arrays.h
+
