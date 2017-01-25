@@ -1,4 +1,0 @@
-/home/aardz6/learningmodules_aardz6/arrays/build/CMakeFiles/test.dir
-/home/aardz6/learningmodules_aardz6/arrays/build/CMakeFiles/edit_cache.dir
-/home/aardz6/learningmodules_aardz6/arrays/build/CMakeFiles/rebuild_cache.dir
-/home/aardz6/learningmodules_aardz6/arrays/build/CMakeFiles/arrays_test.dir
