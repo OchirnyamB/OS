@@ -49,42 +49,22 @@ int string_tokenize(const char *str, const char *delims, const size_t str_length
         if(tokens[i] == NULL) return -1; 
     }
     
+    char* str_cpy = malloc(sizeof(str));
+    strncpy(str_cpy, str, str_length);
 
-    char* src = malloc(sizeof(char)*str_length);
-    //memset(src, '\0', sizeof(src));
-    strcpy(src, str);
-
-    printf("%s", src);
-    char* token = malloc(sizeof(char)*max_token_length);
-    //token = strtok(src, delims);
-   /* int i = 0;
-    strcpy(*(tokens+i), token);
-    printf("%s", (tokens);*/
-    //i++;
-    
-    /*while(token != NULL){
-        token = strtok(NULL, delims);
-        strcpy(*(tokens+i), token);
-      //  i++;
-    }*/
-
-    /*int i =0;
     char* token;
-    token = strtok(src, delims);
-    strcpy(*(tokens+i), token);
-    
-    while(token != NULL){
+
+    token = strtok(str_cpy, delims);
+    int length = 0;
+    strcpy(tokens[0], token);
+    while(length < requested_tokens-1){
+        length++;
         token = strtok(NULL, delims);
-        strcpy(*(tokens+i), token);
-        i++;
+        strcpy(tokens[length], token);
     }
 
-    while(*tokens != NULL){
-        *(tokens+i) = (strtok(str, delims));
-        i++;
-    }*/
-    free(token);
-	return 1;
+    free(str_cpy);
+    return requested_tokens;
 }
 
 bool string_to_int(const char *str, int *converted_value) {

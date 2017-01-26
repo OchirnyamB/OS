@@ -63,10 +63,30 @@ bool bulk_write(const void *src, const char *output_filename, const size_t offse
 
 bool file_stat(const char *query_filename, struct stat *metadata) {
 
-	return false;
+    if(query_filename == NULL || metadata == NULL) return false;
+
+    if(stat(query_filename, metadata)) return false;
+
+    stat(query_filename, metadata);
+    return true;
+
 }
 
 bool endianess_converter(uint32_t *src_data, uint32_t *dst_data, const size_t src_count) {
 
-	return false;
+    if(src_data == NULL || dst_data == NULL || src_count == 0) return false;
+
+    for(size_t i =0; i < src_count; i++){
+        uint32_t num = src_data[i];
+        uint32_t b0, b1, b2, b3;
+
+        b0 = (num & 0x000000ff) << 24u; //move byte 0 to 3
+        b1 = (num & 0x0000ff00) << 8u; // move byte 1 to 2
+        b2 = (num & 0x00ff0000) >> 8u; //move byte 2 to 1
+        b3 = (num & 0xff000000) >> 24u; //move byte 3 to 0
+
+        dst_data[i] = b0 | b1 | b2 | b3; //pipe all bytes
+    }
+
+	return true;
 }

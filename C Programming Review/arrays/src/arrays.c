@@ -15,7 +15,8 @@
 
 bool array_copy(const void *src, void *dst, const size_t elem_size, const size_t elem_count) {
 
-    size_t byte_count = elem_size * elem_count;
+    //Byte count measures the total number of bytes in the array to be copied.
+    size_t byte_count = elem_size * elem_count; 
    
     if(src == NULL || dst == NULL || byte_count == 0) return false;
     

@@ -8,7 +8,30 @@
 
 bitmap_t *bitmap_create(size_t n_bits) {
 
-    return NULL;
+	if(n_bits ==0) return NULL;
+
+	bitmap_t *bitmap = malloc(sizeof(*bitmap));
+
+	if(bitmap != NULL){
+
+		bitmap->bit_count = n_bits;
+
+		size_t n_bytes = n_bits / 8;
+		if(n_bits % 8){
+			n_bytes++;
+		}
+
+		bitmap->byte_count = n_bytes;
+
+		bitmap->data = calloc(bitmap->byte_count, sizeof(*bitmap->data));
+		
+		if(bitmap->data == NULL){
+			free(bitmap);
+			bitmap = NULL;
+		}
+	}
+
+    return bitmap;
 }
 
 bool bitmap_set(bitmap_t *const bitmap, const size_t bit) {
