@@ -15,8 +15,8 @@ bool bulk_read(const char *input_filename, void *dst, const size_t offset, const
 
     if(input_filename == NULL || dst == NULL || !strcmp(dst, "\n") || !strcmp(dst, "\0") || offset > dst_size || dst_size == 0) return false;
 
-    int descriptor = open(input_filename, O_RDWR);
-    if(descriptor < 0) return false;
+    int descriptor = open(input_filename, O_RDWR); //Open file descriptor
+    if(descriptor < 0) return false; //If descriptor is less than zero, there was an error in opening the file
     
     size_t read_data; 
 
@@ -26,7 +26,7 @@ bool bulk_read(const char *input_filename, void *dst, const size_t offset, const
         read_data = read(descriptor, dst, offset);
     }
     
-    if(read_data < 0) return false;
+    if(read_data < 0) return false; //If descriptor is less than zero, there was an error in opening the file
  
     if(read_data == dst_size) return true;
 
@@ -38,22 +38,19 @@ bool bulk_write(const void *src, const char *output_filename, const size_t offse
     if(output_filename == NULL || src == NULL || !strcmp(output_filename, "\n") || !strcmp(output_filename, "\0") || !strcmp(output_filename, "") || src_size == 0) return false;
 
     int descriptor = open(output_filename, O_WRONLY);
-    if(descriptor < 0) return false;
+    if(descriptor < 0) return false; //If descriptor is less than zero, there was an error in opening the file
 
     size_t write_data;
 
     if(offset == 0){
         write_data = write(descriptor, src, src_size-offset);
-    } else if(offset > src_size) {
+    } else if(offset > src_size) { //case where offset is greater than source size 
         write_data = write(descriptor, src, src_size);
-        //return true;
     } else{
         write_data = write(descriptor, src, offset);
     }
 
-    printf("%d\n", (int)write_data);
-
-    if(write_data < 0) return false;
+    if(write_data < 0) return false; //if write_data is less than 0, the write system call returned with an error
 
     if(write_data == src_size) return true;
 
@@ -65,7 +62,7 @@ bool file_stat(const char *query_filename, struct stat *metadata) {
 
     if(query_filename == NULL || metadata == NULL) return false;
 
-    if(stat(query_filename, metadata)) return false;
+    if(stat(query_filename, metadata) < 0) return false; //Stat return a negative value on failure
 
     stat(query_filename, metadata);
     return true;
