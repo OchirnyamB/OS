@@ -16,7 +16,7 @@ int create_blank_records(Record_t **records, const size_t num_records) {
 
 	*records = (Record_t*) malloc(sizeof(Record_t) * num_records);
 
-	memset(*records,0,sizeof(Record_t) * num_records);
+	memset(*records,0,sizeof(Record_t) * num_records); //store records in space provided 
 	return 0;	
 }
 
@@ -24,15 +24,15 @@ int read_records(const char *input_filename, Record_t *records, const size_t num
 
 	if(input_filename == NULL || records == NULL || num_records <= 0) return -1;
 
-	int fd = open(input_filename, O_RDONLY);
-	if(fd < 0) return -2;
+	int fd = open(input_filename, O_RDONLY); //open file descriptor to reading
+	if(fd < 0) return -2; //if file failed to open
 
   	ssize_t data_read = 0;
   	for (size_t i = 0; i < num_records; ++i) {
-		data_read = read(fd,&records[i], sizeof(Record_t));
-		if((int)data_read == 0 ) return -3; 
+		data_read = read(fd,&records[i], sizeof(Record_t)); //read data
+		if((int)data_read == 0 ) return -3; //if there was an error reading data terminate
 	}
-	return 0;
+	return 0; //exit succesfully
 }
 
 int create_record(Record_t **new_record, const char* name, int age) {
@@ -41,7 +41,7 @@ int create_record(Record_t **new_record, const char* name, int age) {
 
 	*new_record = (Record_t*) malloc(sizeof(Record_t));
 	
-	memcpy((*new_record)->name,name,sizeof(char) * strlen(name));
+	memcpy((*new_record)->name,name,sizeof(char) * strlen(name)); //copy data to new record
 	(*new_record)->name[MAX_NAME_LEN - 1] = 0;	
 	(*new_record)->age = age;
 	return 0;

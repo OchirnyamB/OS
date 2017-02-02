@@ -22,16 +22,16 @@ void print_alignments()
 int sort_fruit(const fruit_t* a,int* apples,int* oranges, const size_t size)
 {
 	size_t i; 
-	for(i = 0; i < size; i ++) a[i].type == 1 ? apples[0]++ : oranges[0]++;
+	for(i = 0; i < size; i ++) a[i].type == 1 ? apples[0]++ : oranges[0]++; //if type = 1, increment apples, else increment oranges
 	return size;
 	
 }
 
 int initialize_array(fruit_t* a, int apples, int oranges)
 {
-	int size = apples + oranges;
-	for(int i = 0; i < size - apples; i++) a[i].type = 0;
-	for(int i = size - apples; i < size; i++) a[i].type = 1;
+	int size = apples + oranges; //size is sum of apples and oranges
+	for(int i = 0; i < size - apples; i++) a[i].type = 0; //size-apples is the number of oranges
+	for(int i = size - apples; i < size; i++) a[i].type = 1; //start this for loop where the last one left off
 	return 0;
 }
 
